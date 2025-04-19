@@ -1,4 +1,4 @@
-![Log Classification System](https://via.placeholder.com/800x400?text=Log+Classification+System)
+#Log Classification System
 
 ## 📋 Overview
 
