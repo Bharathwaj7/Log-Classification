@@ -39,7 +39,7 @@ A hybrid **Log Classification System** designed for a US-based client at ATCK Te
 
 ### 1. Clone the Repo  
 ```bash
-git clone https://github.com/yourusername/log-classification-system.git
+git clone https://github.com/Bharathwaj7/log-classification-system.git
 cd log-classification-system
 ```
 
