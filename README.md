@@ -1,99 +1,137 @@
-# 📄 Chat with PDF using Groq
-
-description: >
-  Interact with your PDF documents using a conversational AI powered by Groq's cutting-edge LLMs and Streamlit!  
-  Built for document understanding, question answering, and real-time knowledge extraction. 🚀
-
-overview:
-  description: >
-    This application allows users to upload one or more PDF files, automatically process the text inside them, and interact conversationally via a selected Groq-hosted Large Language Model (LLM).  
-    It combines modern embeddings, local vector search (FAISS), and LLM-driven reasoning to answer your queries accurately. 📚
-
-features:
-  - Multi-PDF Upload: Upload one or several PDF documents at once for combined analysis. 📄
-  - Dynamic Chunking: Automatically adjusts the text split size based on document size for optimized retrieval. 🔄
-  - Embeddings-Based Search: Create vector representations of document chunks using Sentence Transformers. 🧠
-  - Groq Model Selection: Choose from a wide range of high-performance Groq models for answering your queries. 🤖
-  - First-Time Setup Auto-Install: Automatically installs missing Python packages if they aren't detected. ⚙️
-  - Streamlit Interface: Clean, minimal, and interactive web UI for uploading files and chatting. 💻
-  - Environment Configurable: Manage API keys and settings easily via `.env` files. 🔑
-
-technical_stack:
-  backend:
-    - LangChain: Document loading, splitting, retrieval, and QA chains. 🔗
-    - FAISS: High-performance local vector store for fast similarity search. ⚡
-    - Sentence Transformers: Embedding generation via Hugging Face. 💬
-    - PyPDF2: PDF parsing and text extraction. 📑
-    - Groq API: Hosted LLM access for chat generation. 🌐
-  frontend:
-    - Streamlit: Real-time web UI for uploads, processing, and question answering. 🖥️
-  infrastructure:
-    - Python-dotenv: Environment variable management. 🛠️
-    - Subprocess / pip Auto-Installer: First-time dependency management. 📦
-
-getting_started:
-  steps:
-    - Clone the Repo: |
-        git clone https://github.com/your-username/chat-with-pdf-using-groq.git
-        cd chat-with-pdf-using-groq
-    - Create & Activate Virtual Environment: |
-        python3 -m venv venv
-        source venv/bin/activate  # On Windows use: venv\Scripts\activate
-    - Install Dependencies: |
-        pip install -r requirements.txt
-        (Or simply run the app and dependencies will auto-install.)
-    - Set Environment Variables: |
-        Create a .env file in the project root with your Groq API key:
-        GROQ_API_KEY=your-groq-api-key-here
-    - Run the App: |
-        streamlit run app.py
-
-models_supported:
-  - qwen-qwq-32b
-  - deepseek-r1-distill-llama-70b
-  - gemma2-9b-it
-  - compound-beta
-  - compound-beta-mini
-  - llama-3.1-8b-instant
-  - llama3-70b-8192
-  - meta-llama/llama-4-maverick-17b-128e-instruct
-  - mistral-saba-24b
-  - whisper-large-v3
-  - allam-2-7b
-  - and more... 🧑‍💻
-
-how_it_works:
-  - Upload PDFs: Users upload PDFs through the sidebar. 📂
-  - Text Extraction: PyPDF2 extracts raw text from each page of the uploaded PDFs. 🔍
-  - Chunk Splitting: Text is broken down using RecursiveCharacterTextSplitter based on document size. 🧩
-  - Vector Embedding: Chunks are converted to vector embeddings via a pre-trained HuggingFace model (all-MiniLM-L6-v2). 🔢
-  - FAISS Vector Store: The embedded chunks are stored locally using FAISS for efficient retrieval. 💾
-  - Question Input: Users ask questions based on the uploaded documents. ❓
-  - Contextual Retrieval: FAISS fetches the top relevant document chunks using semantic similarity. 🏃‍♂️
-  - Answer Generation: Retrieved context is passed into the selected Groq LLM using a custom prompt for answering. 🧑‍🏫
-  - Streaming Results: Answers are displayed back in real time on Streamlit. ⏱️
-
-project_structure:
-  chat-with-pdf-using-groq/:
-    - app.py: Main Streamlit application 📝
-    - faiss_index/: Saved FAISS index (created after processing PDFs) 📂
-    - requirements.txt: Python dependencies 📑
-    - .env: Environment variables (to be created) 🔐
-    - README.md: Documentation (you are here) 📖
-    - LICENSE: MIT License 📜
-
-customization:
-  - Add New Groq Models: Update the AVAILABLE_MODELS list in app.py with new model names. ⚙️
-  - Change Embedding Models: Modify the get_embeddings() function to swap in different Sentence Transformer models. 🔄
-  - Tune Prompt Templates: Edit the prompt_template inside make_qa_chain() to guide Groq LLMs differently. ✍️
-  - Adjust Chunk Size Logic: Tweak compute_chunk_size() if you want different splitting heuristics based on your dataset. 🧳
-
-performance_considerations:
-  - Chunk Size Tuning: Large chunks may result in slower search but better context for answers. ⏳
-  - Batch Inference: Consider batching multiple user queries if scaling is needed. 🗂️
-  - GPU Deployment: If you embed very large PDFs, running on GPU machines speeds up HuggingFace models. 🖥️💨
-  - Memory Management: FAISS saves indexes locally, enabling persistence between runs. 💾
-  - Scaling Streamlit: Deploy Streamlit via services like Streamlit Sharing, AWS EC2, or Hugging Face Spaces for multi-user access. 🌍
-
-license:
-  description: "This project is licensed under the MIT License – see the LICENSE file for details. 📝"
+# Log Classification System
+ 
+ ## 📋 Overview
+ 
+ A hybrid **Log Classification System** designed for a US-based client at ATCK Technologies. This solution automates log monitoring by combining rule‑based, machine‑learning, and LLM‑driven approaches to accurately categorize incoming logs in real time, reducing downtime, manual effort, and security risks.
+ 
+ ## ✨ Features
+ 
+ - **Regex‑Based Classification**  
+   Quickly detect and label logs matching fixed patterns via Python regular expressions.  
+ - **BERT + Logistic Regression**  
+   Leverage BERT embeddings with a lightweight PyTorch logistic regression layer for patterns with ample training data.  
+ - **LLM‑Fallback Classification**  
+   Employ a Large Language Model (e.g., LLaMA) when training samples are scarce or patterns are too complex.  
+ - **FastAPI Backend**  
+   Serve classification endpoints over a high‑performance REST API.  
+ - **Extensible & Configurable**  
+   Easily add new regex rules, retrain BERT models, or swap in different LLMs with minimal code changes.  
+ - **Real‑Time Monitoring**  
+   Aggregate and classify logs on the fly for immediate alerting and dashboard integration.
+ 
+ ## 🔧 Technical Stack
+ 
+ - **Deep Learning & NLP**  
+   - BERT (via Hugging Face Transformers)  
+   - LLaMA or alternative LLM  
+   - PyTorch for embedding & logistic regression  
+ - **Rule‑Based**  
+   - Python `re` module for regular expressions  
+ - **API Layer**  
+   - FastAPI with Uvicorn  
+ - **Development Environment**  
+   - PyCharm Professional (3‑month free trial available)  
+ - **Data Handling & Clustering**  
+   - Pandas, NumPy  
+   - scikit‑learn’s DBSCAN for pattern discovery  
+ 
+ ## 🚀 Getting Started
+ 
+ ### 1. Clone the Repo  
+ ```bash
+ git clone https://github.com/Bharathwaj7/log-classification-system.git
+ git clone https://github.com/Bharathwaj7/Log-Classification.git.git
+ cd log-classification-system
+ ```
+ 
+ ### 2. Create & Activate Virtual Env  
+ ```bash
+ python3 -m venv venv
+ source venv/bin/activate
+ ```
+ 
+ ### 3. Install Dependencies  
+ ```bash
+ pip install -r requirements.txt
+ ```
+ 
+ ### 4. Prepare Data  
+ - Place your log files (CSV/Excel) into `data/`  
+ - Ensure columns: `timestamp`, `source`, `message`, `target_label`  
+ 
+ ### 5. Index Regex Patterns  
+ ```bash
+ python scripts/cluster_and_generate_regex.py   --input data/raw_logs.xlsx   --output configs/regex_patterns.json
+ ```
+ 
+ ## 🖥️ How to Use
+ 
+ 1. **Run the Classifier**  
+    ```bash
+    uvicorn app.main:app --reload
+    ```
+ 2. **Upload & Classify Logs**  
+    - POST your log batch to `/classify/batch`  
+    - GET classification results at `/classify/{log_id}`  
+ 3. **Monitor in Real Time**  
+    - Connect to WebSocket `/ws/logs` for continuous stream  
+ 
+ ## 🧠 How It Works
+ 
+ 1. **Log Ingestion**  
+    Logs are received in CSV/Excel and parsed into a DataFrame.  
+ 2. **Pattern Discovery**  
+    DBSCAN clustering identifies recurring message structures to seed regex rules.  
+ 3. **Hybrid Classification Pipeline**  
+    - **Step 1: Regex Engine**  
+      Match against predefined patterns for deterministic categories.  
+    - **Step 2: BERT Model**  
+      For unmatched logs with ≥N samples, encode with BERT and classify via logistic regression.  
+    - **Step 3: LLM Fallback**  
+      For outliers or under‑sampled categories, query the LLM with a prompt template for final labeling.  
+ 4. **Result Aggregation**  
+    Responses from each stage are merged, with confidence scores, and stored in the metadata index.
+ 
+ ## 📁 Project Structure
+ 
+ ```
+ log-classification-system/
+ ├── models/
+ │   └── log_classifier.joblib       # Trained BERT+LR model
+ ├── training/
+ │   ├── dataset/                    # Raw and labeled log files
+ │   └── training.ipynb              # Exploration & prototyping notebook
+ ├── classify.py                     # CLI for single/batch classification
+ ├── main.py                         # Entry point for model training & utils
+ ├── processor_bert.py               # BERT embedding & LR classification
+ ├── processor_llm.py                # LLM‐based classification logic
+ ├── processor_regex.py              # Regex pattern generation & matching
+ ├── server.py                       # FastAPI application
+ ├── configs/                        # Configuration files (e.g. regex patterns)
+ ├── requirements.txt
+ └── LICENSE                         # MIT License
+ ```
+ 
+ ## 🛠️ Customization
+ 
+ - **Add New Regex Rules**  
+   Update `configs/regex_patterns.json` or rerun the clustering script with new data.  
+ - **Retrain BERT Model**  
+   Modify `models/bert_classifier.py` to tweak hyperparameters or swap in a different transformer.  
+ - **Swap LLM**  
+   In `models/llm_classifier.py`, change the model endpoint or prompt template to use GPT‑4, LLaMA, etc.  
+ 
+ ## 📊 Performance Considerations
+ 
+ - **Batch Inference**  
+   Group log entries to amortize model loading overhead.  
+ - **GPU Acceleration**  
+   Use a CUDA‑enabled machine for BERT embedding and LLM calls.  
+ - **Caching & Async I/O**  
+   Leverage FastAPI’s async features and an in‑memory cache for repeated queries.  
+ - **Scalability**  
+   Deploy behind a load‑balancer; consider FAAS for sporadic LLM fallback calls.
+ 
+ ## 📝 License
+ 
+ This project is licensed under the **MIT License** – see the [LICENSE](LICENSE) file for details.
